@@ -27,6 +27,31 @@ func BasedVriable() {
 	fmt.Println(str4, str5, str6)
 }
 
+func CallDefer() {
+	fmt.Println("call CallDefer...")
+}
+
+//数组、动态数组（slice）、切片的定义
+func DinamicSlice() {
+	/*
+		defer关键字用于方法体结束之后调用
+		类似于APO思想，c#里方法体执行之后要做的事情，比如释放资源、返回值处理等
+	*/
+	defer CallDefer()
+	/*
+		切片作为传参，是引用传递
+		cap是容量，当append超过容量后，后面还会继续开辟空间相同大小的cap空间
+		切片声明的4种方式
+	*/
+	//slice1 := []int{12, 12, 34}
+	//var slice1 = []int //没有开辟空间 为nil
+	//var slice1 = make([]int,3)//开辟空间为3
+	slice1 := make([]int, 3, 5) //常用写法
+	fmt.Println("len = %d,slice = %v,cap = %d", len(slice1), slice1, cap(slice1))
+	slice1 = append(slice1, 1)
+	fmt.Println("len = %d,slice = %v,cap = %d", len(slice1), slice1, cap(slice1))
+}
+
 func init() {
 
 	fmt.Println("init basekgrammar...")
