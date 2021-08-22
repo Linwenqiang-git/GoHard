@@ -1,6 +1,8 @@
 package datalogic
 
-import "fmt"
+import (
+	_"fmt"
+)
 
 //首字母大写 表示外面可访问这个方法
 //罗马数字转换
@@ -84,5 +86,5 @@ func Sort(nums []int) []int {
 
 //初始化方法 -- 构造函数类似  如果有参数，比如依赖注入怎么处理？
 func init() {
-	fmt.Println("init datalogic...")
+	//fmt.Println("init datalogic...")
 }

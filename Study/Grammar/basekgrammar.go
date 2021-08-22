@@ -54,5 +54,5 @@ func DinamicSlice() {
 
 func init() {
 
-	fmt.Println("init basekgrammar...")
+	//fmt.Println("init basekgrammar...")
 }

@@ -6,7 +6,7 @@ import (
 	_ "github.linwenqiang.com/Study/DataLogic" // . 表示调用内部公开方法时可不用写包名
 	//DL "/DataLogic/dataLogic" //DL 给包起的别名
 
-	GM "github.linwenqiang.com/Study/Grammar/basekgrammar"
+	GM "github.linwenqiang.com/Study/Grammar"
 )
 
 //声明全局变量

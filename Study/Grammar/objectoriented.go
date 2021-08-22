@@ -1,7 +1,9 @@
-package objectoriented
+//一个项目文件夹下的包名相同 类似于按功能拆分，类似c#里partial类关键字修饰
+package basekgrammar
 
 import (
 	"fmt"
+	. "fmt"
 )
 
 /*
@@ -24,7 +26,7 @@ func (this Book) GetBookName() string {
 
 /*继承*/
 type MathBook struct {
-	Book //类里显示声明父类
+	Book //类里显示声明父类 继承父类的方法
 	Page int
 }
 
@@ -32,8 +34,11 @@ func (this *MathBook) ShowPage() {
 	fmt.Print("一共有 %d页", this.Page)
 }
 
-/*接口多态*/
-type Animal interface {
+/*
+接口 多态
+interface 本质是一个指针 内部有一个指针指向当前实例，维护一个实例列表
+*/
+type IAnimal interface {
 	Sleep(hourse int)
 }
 
@@ -43,17 +48,19 @@ type Cat struct {
 }
 
 func (this *Cat) Sleep(hourse int) {
-	fmt.Println("cat sleep %d hourse", hourse)
+	Println("cat sleep %d hourse", hourse)
 }
 
 func init() {
-	fmt.Println("object oriented init...")
-	//对象实例化
-	book := Book{Name: "zhangsan"}
-	fmt.Println(book.GetBookName())
-	//子类实例化
-	mathbook := MathBook{Book{Name: "数学", Author: "笛卡尔", Page: 230}}
-	mathbook.ShowPage()
-	//继承多态
-	animal Animal = &Cat{Name:"cat"}
+	// Println("object oriented init...")
+	// //对象实例化
+	// book := Book{Name: "zhangsan"}
+	// Println(book.GetBookName())
+	// //子类实例化
+	// mathbook := MathBook{Book{Name: "数学", Author: "笛卡尔"}, 230}
+	// mathbook.ShowPage()
+	// //继承多态
+	// var animal IAnimal = &Cat{Name: "cat"} //因为IAnimal 本质是一个指针，所以需要传递引用
+	// animal.Sleep(4)
+
 }
