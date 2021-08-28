@@ -114,25 +114,25 @@ func JsonToStruct(jsonstr []byte) {
 }
 
 func init() {
-	Println("advance init...")
-	//断言
-	CallCommonType("sss")
+	// Println("advance init...")
+	// //断言
+	// CallCommonType("sss")
 
-	//b pair<type:Essay,value:Essay{}地址>
-	b := &Essay{Name: "张三", Page: 10}
+	// //b pair<type:Essay,value:Essay{}地址>
+	// b := &Essay{Name: "张三", Page: 10}
 
-	//r pair<type:,value:>
-	var r Read
-	//r pair<type:MathBook,value:MathBook{}地址>
-	r = b
+	// //r pair<type:,value:>
+	// var r Read
+	// //r pair<type:MathBook,value:MathBook{}地址>
+	// r = b
 
-	r.ReadBook()
-	Println("======================================================")
-	//DoFieldAndMethod(Essay{Name: "李四", Page: 10})
-	var tag rensume = rensume{Name: "zhangsan", Age: 10, Info: "json info"}
-	//FindTag(&tag)
-	GetJsonData(tag)
-	Println("======================================================")
+	// r.ReadBook()
+	// Println("======================================================")
+	// //DoFieldAndMethod(Essay{Name: "李四", Page: 10})
+	// var tag rensume = rensume{Name: "zhangsan", Age: 10, Info: "json info"}
+	// //FindTag(&tag)
+	// GetJsonData(tag)
+	// Println("======================================================")
 
 	// var w Write
 	// w = r.(Write) //此处能断言 是因为 r和w类型一致

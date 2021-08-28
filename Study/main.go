@@ -6,7 +6,7 @@ import (
 	_ "github.linwenqiang.com/Study/DataLogic" // . 表示调用内部公开方法时可不用写包名
 	//DL "/DataLogic/dataLogic" //DL 给包起的别名
 
-	GM "github.linwenqiang.com/Study/Grammar"
+	_ "github.linwenqiang.com/Study/Grammar"
 )
 
 //声明全局变量
@@ -18,7 +18,7 @@ var (
 func main() {
 
 	//GM.BasedVriable()
-	GM.DinamicSlice()
+	//GM.DinamicSlice()
 
 	// nums := TwoSum([]int{9, 8, 7, 6, 5, 4, 3, 2, 1}, 9)
 	// fmt.Printf("%v", nums)
