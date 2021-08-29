@@ -72,7 +72,7 @@ func init() {
 	// 	num := <-c
 	// 	println("Main Console, i = ", num)
 	// }
-	// //两种写法等价
+	// //两种写法等价  当通道内没有数据时，range会阻塞
 	// for data := range c {
 	// 	println("Main Console, i = ", data)
 	// }
@@ -81,15 +81,15 @@ func init() {
 	// var send chan<- int //只写通道
 	// var recv <-chan int //只读通道
 
-	// c1 := make(chan int)
-	// c2 := make(chan int)
-	// go func() {
-	// 	for i := 0; i < 6; i++ {
-	// 		c1 <- i
-	// 		c2 <- i * 10
-	// 	}
+	c1 := make(chan int)
+	c2 := make(chan int)
+	go func() {
+		for i := 0; i < 6; i++ {
+			c1 <- i
+			c2 <- i * 10
+		}
 
-	// }()
-	// selectChannel(c1, c2)
-	// print("Main End")
+	}()
+	selectChannel(c1, c2)
+	print("Main End")
 }
