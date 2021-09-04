@@ -5,6 +5,7 @@ import (
 	"io"
 	"net"
 	"sync"
+	"time"
 )
 
 type Server struct {
@@ -22,9 +23,11 @@ func (this *Server) Handle(conn net.Conn) {
 	user := CreateNewUser(conn, this)
 	//将用户添加到上线表汇总
 	user.OnLine()
-
 	//广播消息，用户上线
 	this.BroadCast(user, "on line")
+
+	//判断用户是否一直活跃
+	isActive := make(chan bool)
 
 	//接收当前连接用户发来的消息
 	go func() {
@@ -34,18 +37,35 @@ func (this *Server) Handle(conn net.Conn) {
 			if n == 0 {
 				this.BroadCast(user, "out line")
 				user.OutLine()
-
 				return
 			}
 			if err != nil && err != io.EOF { //io.EOF 文件结束末尾
 				println("read conn data err:", err)
 			}
-			user.DoMsg(buf, n)
+			msg := string(buf[:n])
+			user.DoMsg(msg, n)
+			isActive <- true
 		}
 	}()
 
 	//阻塞当前handle
-	select {}
+	//超时强踢功能
+	for {
+		select {
+		case <-isActive:
+			//do nothing
+		case <-time.After(time.Second * 10):
+			//off line
+			this.BroadCast(user, "outtime already outline")
+			//删除用户列表
+			this.mapLock.Lock()
+			delete(this.OnlineMap, user.Name)
+			this.mapLock.Unlock()
+			//关闭连接
+			conn.Close()
+		}
+	}
+
 }
 
 //广播消息
@@ -78,7 +98,7 @@ func (this *Server) Start() {
 	//4.close listen socket 最后记得关闭连接
 	defer listener.Close()
 	//监听处理广播消息
-	print("server start:")
+	print(">>>>>>>>>>>server start>>>>>>>>>>>")
 	go this.ListenMessager()
 	//循环的接收消息
 	for {

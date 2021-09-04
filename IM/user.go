@@ -26,12 +26,11 @@ func (this *User) OutLine() {
 	this.BelongServer.mapLock.Unlock()
 }
 
-//用户发送消息
-func (this *User) DoMsg(buf []byte, n int) {
-	//提取用户信息
-	msg := string(buf[:n])
+//处理消息
+func (this *User) DoMsg(msg string, n int) {
 	//再将信息广播
 	this.BelongServer.BroadCast(this, msg)
+	//可根据消息做特殊处理
 }
 
 //监听有没有消息

@@ -12,8 +12,10 @@ func Console() {
 }
 
 //select 结合channel使用 能够同时监控多个channel的状态
+//所有channel表达式都会被求值，所有被发送的表达式都会被求值,求值顺序：自上而下，自左向右，结果是选择一个发送或者接收的channel，
+//无论是选择哪一个case进行操作，表达式（比如方法、运算等）都会被执行
 //select 默认阻塞，只有监听的channel中有发送或者接受数据时才运行
-//每个case都会监听，只有所有case 都不满足的时候，才会进入到default
+//如果有一个或多个IO操作可以完成，则GO运行时会随机的选择一个执行，否则，如果有default分支，则执行default，如果没有则会一直阻塞，直到有一个IO可以进行
 func selectChannel(c1, c2 chan int) {
 	count := 0
 	for {
