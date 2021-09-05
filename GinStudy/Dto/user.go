@@ -1,4 +1,4 @@
-package entity
+package dto
 
 type UserDto struct {
 	Username string `form:"username"`
