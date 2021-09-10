@@ -1,18 +1,26 @@
 package controller
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 	Dto "github.linwenqiang.com/GinStudy/Dto"
 	Entity "github.linwenqiang.com/GinStudy/Entity"
+	. "github.linwenqiang.com/GinStudy/InitSql"
 )
 
 var controlelrName = "/User"
 
+/*======================================内部action 不对外提供使用======================================*/
 //用户登录
-func Login(user Dto.UserDto) bool {
+func login(user Dto.UserDto) bool {
+	var context IDbContext = &DbContext{ConnStr: "root:LWQlwq123@@tcp(127.0.0.1:3306)/golangstudy"}
+	context.SetDbConnect()
+	result := context.Query("select * from UserDto", &Dto.UserDto{})
+	fmt.Printf("%v", result)
+
 	if user.Username == "1" && user.Password == "2" {
 		return true
 	} else {
@@ -21,7 +29,7 @@ func Login(user Dto.UserDto) bool {
 }
 
 //获取用户信息
-func GetUserInfo(userId int) Entity.UserEntity {
+func getUserInfo(userId int) Entity.UserEntity {
 	entity := Entity.UserEntity{
 		UserId:    1,
 		UserName:  "张三",
@@ -29,6 +37,8 @@ func GetUserInfo(userId int) Entity.UserEntity {
 	}
 	return entity
 }
+
+/*======================================内部action 不对外提供使用======================================*/
 
 //相当于一个controller 绑定该conterller下面的action
 func BindingUserControllerRouting(engine *gin.Engine) {
@@ -45,7 +55,7 @@ func BindingUserControllerRouting(engine *gin.Engine) {
 			println("获取参数出错：" + err.Error())
 		}
 
-		result := Login(user)
+		result := login(user)
 
 		//Writer的两种写法
 		if result {
@@ -60,7 +70,7 @@ func BindingUserControllerRouting(engine *gin.Engine) {
 		userId := context.Param("userid")
 		id, _ := strconv.Atoi(userId)
 
-		dataResult := GetUserInfo(id)
+		dataResult := getUserInfo(id)
 
 		result := Dto.ResponseModel{
 			Code:   200,
