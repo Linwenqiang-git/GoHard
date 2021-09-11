@@ -63,7 +63,7 @@ func (this *DbContext) Query(sqlstr string, obj interface{}) []interface{} {
 	// 获取列名
 	columns, err := rows.Columns()
 	checkErr(err)
-	//sql.RawBytes是byte[]类型的别名，columnValues是[]byte类型的切片
+	//sql.RawBytes是byte[]类型的别名，columnValues得到的就是[]byte类型的切片
 	columnValues := make([]sql.RawBytes, len(columns))
 	scanArgs := make([]interface{}, len(columnValues))
 
