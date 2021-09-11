@@ -84,6 +84,7 @@ func (this *DbContext) Query(sqlstr string, obj interface{}) []interface{} {
 				continue
 			} else {
 				fieldTypeKind := entityValue.FieldByName(columnName).Type().Kind()
+				//反射根据字段类型设置值
 				if fieldTypeKind == reflect.String {
 					entityValue.FieldByName(columnName).SetString(string(col))
 				} else if fieldTypeKind == reflect.Bool {

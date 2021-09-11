@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"log"
 	"strconv"
 
@@ -18,8 +17,7 @@ var controlelrName = "/User"
 func login(user Dto.UserDto) bool {
 	var context IDbContext = &DbContext{ConnStr: "root:LWQlwq123@@tcp(127.0.0.1:3306)/golangstudy"}
 	context.SetDbConnect()
-	result := context.Query("select * from UserDto", &Dto.UserDto{})
-	fmt.Printf("%v", result)
+	context.Query("select * from UserDto", &Dto.UserDto{})
 
 	if user.Username == "1" && user.Password == "2" {
 		return true
