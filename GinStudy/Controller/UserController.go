@@ -1,33 +1,23 @@
 package controller
 
 import (
-	"fmt"
 	"log"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	Dto "github.linwenqiang.com/GinStudy/Dto"
-	Entity "github.linwenqiang.com/GinStudy/Entity"
 	. "github.linwenqiang.com/GinStudy/InitSql"
+	Dto "github.linwenqiang.com/GinStudy/Model/Dto"
+	Entity "github.linwenqiang.com/GinStudy/Model/Entity"
 )
 
 var controlelrName = "/User"
 
 /*======================================内部action 不对外提供使用======================================*/
 //用户登录
-func login(user Dto.UserDto) bool {
+func login(user Dto.UserDto) []interface{} {
 	var context IDbContext = &DbContext{ConnStr: "root:LWQlwq123@@tcp(127.0.0.1:3306)/golangstudy"}
-	context.SetDbConnect()
-	result := context.Query("select * from UserDto", &Dto.UserDto{})
-	for user := range result {
-		fmt.Printf("%v", user)
-	}
+	return context.Query("select * from UserDto", &Dto.UserDto{})
 
-	if user.Username == "1" && user.Password == "2" {
-		return true
-	} else {
-		return false
-	}
 }
 
 //获取用户信息
@@ -60,11 +50,12 @@ func BindingUserControllerRouting(engine *gin.Engine) {
 		result := login(user)
 
 		//Writer的两种写法
-		if result {
-			context.Writer.Write([]byte("hello," + user.Username + " success login"))
-		} else {
-			context.Writer.WriteString("hello," + user.Password + " fail")
-		}
+		// if result {
+		// 	context.Writer.Write([]byte("hello," + user.Username + " success login"))
+		// } else {
+		// 	context.Writer.WriteString("hello," + user.Password + " fail")
+		// }
+		context.JSON(200, &result)
 	})
 
 	UserRoute.GET("/GetUserInfo/:userid", func(context *gin.Context) {

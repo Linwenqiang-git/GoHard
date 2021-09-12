@@ -3,7 +3,6 @@ package initsql
 import (
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	"reflect"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -15,8 +14,9 @@ type DbContext struct {
 }
 
 /*============================================继承IDbContext============================================*/
+
 //原生连接mysql
-func (this *DbContext) SetDbConnect() {
+func (this *DbContext) setDbConnect() {
 	//数据库连接
 	db, err := sql.Open("mysql", this.ConnStr)
 	checkErr(err)
@@ -26,6 +26,7 @@ func (this *DbContext) SetDbConnect() {
 /*常用数据库操作*/
 //返回受影响行数
 func (this *DbContext) NonQueryReturnRowCount(sql string) int64 {
+	this.setDbConnect()
 	defer this.dbContext.Close()
 	result, err := this.dbContext.Exec(sql)
 	if checkErr(err) {
@@ -40,6 +41,7 @@ func (this *DbContext) NonQueryReturnRowCount(sql string) int64 {
 
 //返回自增ID
 func (this *DbContext) NonQueryReturnLastId(sql string) int64 {
+	this.setDbConnect()
 	defer this.dbContext.Close()
 	result, err := this.dbContext.Exec(sql)
 	if checkErr(err) {
@@ -54,6 +56,7 @@ func (this *DbContext) NonQueryReturnLastId(sql string) int64 {
 
 //查询类，需要指定返回的实体
 func (this *DbContext) Query(sqlstr string, obj interface{}) []interface{} {
+	this.setDbConnect()
 	defer this.dbContext.Close()
 
 	rows, err := this.dbContext.Query(sqlstr)
@@ -70,7 +73,7 @@ func (this *DbContext) Query(sqlstr string, obj interface{}) []interface{} {
 	for i := range columnValues {
 		scanArgs[i] = &columnValues[i]
 	}
-	result := make([]interface{}, 10)
+	result := []interface{}{}
 	for rows.Next() {
 		// get RawBytes from data
 		checkErr(rows.Scan(scanArgs...))
@@ -78,7 +81,6 @@ func (this *DbContext) Query(sqlstr string, obj interface{}) []interface{} {
 		entityValue := reflect.ValueOf(obj).Elem()
 
 		for i, col := range columnValues {
-			// Here we can check if the value is nil (NULL value)
 			columnName := columns[i]
 			if col == nil {
 				continue
@@ -94,11 +96,9 @@ func (this *DbContext) Query(sqlstr string, obj interface{}) []interface{} {
 				}
 			}
 		}
-		//fmt.Println(reflect.TypeOf(entityValue).Name())
-		fmt.Printf("%v", entityValue)
+		//基于初始大小后面append，所以切片默认大小为0即可
 		result = append(result, entityValue.Interface())
 	}
-	fmt.Print(result)
 	return result
 }
 
