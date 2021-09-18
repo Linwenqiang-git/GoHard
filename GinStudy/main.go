@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	. "github.linwenqiang.com/GinStudy/Controller" //.表示调用公共方法不需要加前缀
 	. "github.linwenqiang.com/GinStudy/DependentInjection"
 	. "github.linwenqiang.com/GinStudy/MiddleWare"
 )
@@ -19,7 +18,7 @@ func main() {
 		2.单个接口只用，可直接在第二个参数，把中间件方法传入
 	*/
 	//依赖注入
-	ConfigureService(engine)
+	ConfigureUserServiceDI(engine)
 
 	engine.Use(RequestHandle())
 
@@ -27,9 +26,6 @@ func main() {
 	//engine.LoadHTMLGlob("./html/*")
 	//静态文件加载 第一个参数：前端请求路径， 第二个参数：项目文件路径
 	//engine.Static("/img", "./img")
-
-	//绑定各个模块
-	BindingUserControllerRouting(engine)
 
 	err := engine.Run(":8090")
 	if err != nil {

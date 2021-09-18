@@ -3,32 +3,26 @@ package initsql
 import (
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	"reflect"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
 type DbContext struct {
-	ConnStr   string
-	dbContext *sql.DB
+	Context *sql.DB
 }
 
 /*============================================继承IDbContext============================================*/
-
-//原生连接mysql
-func (this *DbContext) setDbConnect() {
-	//数据库连接
-	db, err := sql.Open("mysql", this.ConnStr)
-	checkErr(err)
-	this.dbContext = db
+func (this *DbContext) Data() string {
+	fmt.Println("正常调用到DbContext")
+	return "success"
 }
 
 /*常用数据库操作*/
 //返回受影响行数
 func (this *DbContext) NonQueryReturnRowCount(sql string) int64 {
-	this.setDbConnect()
-	defer this.dbContext.Close()
-	result, err := this.dbContext.Exec(sql)
+	result, err := this.Context.Exec(sql)
 	if checkErr(err) {
 		return 0
 	}
@@ -41,9 +35,7 @@ func (this *DbContext) NonQueryReturnRowCount(sql string) int64 {
 
 //返回自增ID
 func (this *DbContext) NonQueryReturnLastId(sql string) int64 {
-	this.setDbConnect()
-	defer this.dbContext.Close()
-	result, err := this.dbContext.Exec(sql)
+	result, err := this.Context.Exec(sql)
 	if checkErr(err) {
 		return 0
 	}
@@ -56,10 +48,8 @@ func (this *DbContext) NonQueryReturnLastId(sql string) int64 {
 
 //查询类，需要指定返回的实体
 func (this *DbContext) Query(sqlstr string, obj interface{}) []interface{} {
-	this.setDbConnect()
-	defer this.dbContext.Close()
 
-	rows, err := this.dbContext.Query(sqlstr)
+	rows, err := this.Context.Query(sqlstr)
 	checkErr(err)
 	defer rows.Close()
 
