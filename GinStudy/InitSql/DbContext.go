@@ -7,9 +7,11 @@ import (
 	"reflect"
 
 	_ "github.com/go-sql-driver/mysql"
+	"go.uber.org/dig"
 )
 
 type DbContext struct {
+	dig.In
 	Context *sql.DB
 }
 

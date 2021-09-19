@@ -8,10 +8,12 @@ import (
 
 	. "github.linwenqiang.com/GinStudy/InitSql"
 	Dto "github.linwenqiang.com/GinStudy/Model/Dto"
+	"go.uber.org/dig"
 )
 
 type UserService struct {
-	Repo *DbContext `inject:""`
+	dig.In
+	Repo DbContext
 }
 
 func (user *UserService) Login(username, password string) []interface{} {
@@ -20,7 +22,7 @@ func (user *UserService) Login(username, password string) []interface{} {
 	// 	fmt.Println("Structure is empty")
 	// }
 	fmt.Println("正常调用到service")
-	fmt.Println(user.Repo.Data())
+	fmt.Println(user.Repo.Query("select * from UserDto", &Dto.UserDto{}))
 	return nil
 	//return user.Repo.Query("select * from UserDto", &Dto.UserDto{})
 }
