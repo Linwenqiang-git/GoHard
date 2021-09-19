@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -51,20 +50,18 @@ func BindingUserControllerRouting(engine *gin.Engine, container *dig.Container) 
 	UserRoute := engine.Group(controlelrName)
 	{
 		UserRoute.POST("/login", func(context *gin.Context) {
+			result := Dto.NewResult(context)
 			//这一部分相当于前置处理
 			var user Dto.UserDto
 			err := context.Bind(&user)
 			if err != nil {
 				log.Fatal(err.Error())
 				println("获取参数出错：" + err.Error())
+				result.Error(500, "获取参数出错：")
 			}
-			Containererr := container.Invoke(Login)
-			if err != nil {
-				fmt.Println("调用异常")
-				fmt.Println(Containererr)
-			}
+			PrintDI_Error(container.Invoke(Login))
 
-			context.JSON(200, "我成功返回啦")
+			result.Success("我成功返回啦")
 		})
 		UserRoute.GET("/GetUserInfo/:userid", func(context *gin.Context) {
 			//PrintDI_Error(container.Provide(*context))
