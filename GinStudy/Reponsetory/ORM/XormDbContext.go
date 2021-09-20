@@ -47,7 +47,10 @@ func init() {
 	if err != nil {
 		fmt.Println("读取配置文件失败")
 	}
-	config := initMySQLConfig(cfg)
+	config, err := initMySQLConfig(cfg)
+	if err != nil {
+		fmt.Println("装载配置信息失败")
+	}
 	Engine, err := xorm.NewEngine("mysql", initMysqlStr(config))
 	if err != nil {
 		fmt.Println("xorm连接数据库失败：", err)

@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	Dto "github.linwenqiang.com/GinStudy/Model/Dto"
+	impl "github.linwenqiang.com/GinStudy/Service"
 )
 
 type OrderController struct {
@@ -12,7 +13,7 @@ type OrderController struct {
 
 func (oc *OrderController) CreateOrder(context *gin.Context) {
 	result := Dto.NewResult(context)
-	//这一部分相当于前置处理
+	//controller相当于前置处理
 	var model Dto.OrderDto
 	err := context.Bind(&model)
 	if err != nil {
@@ -21,8 +22,13 @@ func (oc *OrderController) CreateOrder(context *gin.Context) {
 		result.Error(500, "获取参数出错")
 	}
 	//调用具体的业务逻辑层
-	service := impl.NewMemberService()
-	result.Success("我成功返回啦")
+	service := impl.NewOrdeService()
+	data, err := service.CreateOrder(model)
+	if data > 0 {
+		result.Success("创建订单成功")
+	} else {
+		result.Success("创建订单失败:" + err.Error())
+	}
 }
 
 /*======================================内部action 不对外提供使用======================================*/

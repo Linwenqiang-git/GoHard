@@ -7,6 +7,6 @@ import (
 type OrderService struct {
 }
 
-func (os *OrderService) CreateOrder(model Dto.OrderDto) {
-	
+func (os *OrderService) CreateOrder(model Dto.OrderDto) (int, error) {
+
 }
