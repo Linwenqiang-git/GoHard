@@ -1,14 +1,11 @@
 package main
 
 import (
-	"log"
-
 	"github.com/gin-gonic/gin"
 	. "github.linwenqiang.com/GinStudy/Controller"
+	controller "github.linwenqiang.com/GinStudy/Controller"
 	. "github.linwenqiang.com/GinStudy/DependentInjection"
 	. "github.linwenqiang.com/GinStudy/MiddleWare"
-	Dto "github.linwenqiang.com/GinStudy/Model/Dto"
-	"go.uber.org/dig"
 )
 
 func main() {
@@ -34,38 +31,11 @@ func main() {
 
 	//绑定路由
 	BindingUserControllerRouting(engine, container)
+	//这种路由绑定方式比较友好
+	new(controller.OrderController).BindingOrderControllerRouting(engine)
 
 	err := engine.Run(":8090")
 	if err != nil {
 		println("start server fail:", err)
-	}
-}
-
-/*======================================内部action 不对外提供使用======================================*/
-//相当于一个controller 绑定该conterller下面的action
-func BindingUserControllerRouting(engine *gin.Engine, container *dig.Container) {
-	var controlelrName = "/User"
-
-	//路由分组，对应controller的划分
-	UserRoute := engine.Group(controlelrName)
-	{
-		UserRoute.POST("/login", func(context *gin.Context) {
-			result := Dto.NewResult(context)
-			//这一部分相当于前置处理
-			var user Dto.UserDto
-			err := context.Bind(&user)
-			if err != nil {
-				log.Fatal(err.Error())
-				println("获取参数出错：" + err.Error())
-				result.Error(500, "获取参数出错：")
-			}
-			PrintDI_Error(container.Invoke(Login))
-			//无法获取到返回结果
-			result.Success("我成功返回啦")
-		})
-		UserRoute.GET("/GetUserInfo/:userid", func(context *gin.Context) {
-			//PrintDI_Error(container.Provide(*context))
-			PrintDI_Error(container.Invoke(GetUserInfo))
-		})
 	}
 }

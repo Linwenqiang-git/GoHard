@@ -39,12 +39,18 @@ func initMySQLConfig(cfg *ini.File) (*MySqlDbConfig, error) {
 	if err != nil {
 		return nil, err
 	}
+	show_sql, err := cfg.Section("mysql").Key("show_sql").Bool()
+	if err != nil {
+		return nil, err
+	}
 	return &MySqlDbConfig{
 		Ip:       cfg.Section("mysql").Key("ip").String(),
 		Port:     port,
 		User:     cfg.Section("mysql").Key("user").String(),
 		Password: cfg.Section("mysql").Key("password").String(),
 		Database: cfg.Section("mysql").Key("database").String(),
+		Charset:  cfg.Section("mysql").Key("charset").String(),
+		Show_sql: show_sql,
 	}, nil
 }
 

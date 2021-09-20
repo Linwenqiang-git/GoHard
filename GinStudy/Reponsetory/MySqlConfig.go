@@ -7,4 +7,6 @@ type MySqlDbConfig struct {
 	User     string
 	Password string
 	Database string
+	Charset  string
+	Show_sql bool
 }

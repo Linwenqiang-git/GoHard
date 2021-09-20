@@ -2,15 +2,15 @@ package controller
 
 import (
 	"fmt"
-	//"log"
+	"log"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/dig"
 
+	. "github.linwenqiang.com/GinStudy/DependentInjection"
 	Dto "github.linwenqiang.com/GinStudy/Model/Dto"
 
-	//. "github.linwenqiang.com/GinStudy/Service/IService"
 	service "github.linwenqiang.com/GinStudy/Service"
 )
 
@@ -49,4 +49,33 @@ func GetUserInfo(this UserController, context *gin.Context) {
 	result.Success(dataResult)
 	//json格式返回数据
 	context.JSON(200, &result)
+}
+
+/*======================================内部action 不对外提供使用======================================*/
+//相当于一个controller 绑定该conterller下面的action
+func BindingUserControllerRouting(engine *gin.Engine, container *dig.Container) {
+	var controlelrName = "/User"
+
+	//路由分组，对应controller的划分
+	UserRoute := engine.Group(controlelrName)
+	{
+		UserRoute.POST("/login", func(context *gin.Context) {
+			result := Dto.NewResult(context)
+			//这一部分相当于前置处理
+			var user Dto.UserDto
+			err := context.Bind(&user)
+			if err != nil {
+				log.Fatal(err.Error())
+				println("获取参数出错：" + err.Error())
+				result.Error(500, "获取参数出错：")
+			}
+			PrintDI_Error(container.Invoke(Login))
+			//无法获取到返回结果
+			result.Success("我成功返回啦")
+		})
+		UserRoute.GET("/GetUserInfo/:userid", func(context *gin.Context) {
+			//PrintDI_Error(container.Provide(*context))
+			PrintDI_Error(container.Invoke(GetUserInfo))
+		})
+	}
 }
