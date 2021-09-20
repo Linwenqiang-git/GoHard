@@ -60,7 +60,7 @@ func BindingUserControllerRouting(engine *gin.Engine, container *dig.Container) 
 				result.Error(500, "获取参数出错：")
 			}
 			PrintDI_Error(container.Invoke(Login))
-
+			//无法获取到返回结果
 			result.Success("我成功返回啦")
 		})
 		UserRoute.GET("/GetUserInfo/:userid", func(context *gin.Context) {

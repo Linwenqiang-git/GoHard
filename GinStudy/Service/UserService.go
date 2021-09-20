@@ -1,19 +1,16 @@
 package service
 
 import (
-	//"fmt"
-	//"reflect"
-
 	"fmt"
 
-	. "github.linwenqiang.com/GinStudy/InitSql"
 	Dto "github.linwenqiang.com/GinStudy/Model/Dto"
+	repo "github.linwenqiang.com/GinStudy/Reponsetory"
 	"go.uber.org/dig"
 )
 
 type UserService struct {
 	dig.In
-	Repo DbContext
+	Repo repo.DbContext
 }
 
 func (user *UserService) Login(username, password string) []interface{} {

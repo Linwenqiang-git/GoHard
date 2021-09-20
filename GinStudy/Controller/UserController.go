@@ -38,18 +38,15 @@ func Login(this UserController) {
 }
 
 //获取用户信息
-func GetUserInfo(this UserController, context gin.Context) {
+//无法正常调用，context 不能注入到dig容器中
+func GetUserInfo(this UserController, context *gin.Context) {
 	userId := context.Param("userid")
 	fmt.Printf("成功获取到userid:%s", userId)
 	id, _ := strconv.Atoi(userId)
 
 	dataResult := this.UserService.GetUserInfo(id)
-
-	result := Dto.ResponseModel{
-		Code:   200,
-		ErrMsg: "",
-		Data:   dataResult,
-	}
+	result := Dto.NewResult(context)
+	result.Success(dataResult)
 	//json格式返回数据
 	context.JSON(200, &result)
 }

@@ -1,15 +1,31 @@
 package dependentinjection
 
+/*
+=========================dig容器使用总结=========================
+1.注入形式简单，容易理解，轻量级；
+2.构造函数注入通过dig.In的方式，需要注意的是，不能传指针类型，指针类型的必须是在容器里的对象才可；
+3.只能通过Incoke的形式手动执行方法，当方法需要传参或者获取返回值都无法做到，不够灵活；
+
+*/
+
 import (
 	"database/sql"
 	"fmt"
 	"strconv"
 
-	. "github.linwenqiang.com/GinStudy/InitSql"
 	Dto "github.linwenqiang.com/GinStudy/Model/Dto"
+	. "github.linwenqiang.com/GinStudy/Reponsetory"
 	"go.uber.org/dig"
 	"gopkg.in/ini.v1"
 )
+
+type Config struct {
+	/*内嵌了dig.In之后，dig会将该类型中的其它字段看成对象的依赖，
+	  创建Object类型的对象时，会先将依赖的Arg1/Arg2/Arg3/Arg4创建好。
+	  需要注意的是，方法的参数不能传指针类型，因为在容器里是没有这个对象的*/
+	dig.In
+	MySQL *MySqlDbConfig
+}
 
 //加载配置文件
 func initConfig() (*ini.File, error) {

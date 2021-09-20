@@ -10,6 +10,7 @@ func RequestHandle() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		path := context.FullPath()
 		method := context.Request.Method
+		fmt.Println("============================Request MiddleWare============================")
 		fmt.Println("请求路径：", path)
 		fmt.Println("请求的方法：", method)
 
