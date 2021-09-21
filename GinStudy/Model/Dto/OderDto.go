@@ -9,3 +9,18 @@ type OrderDto struct {
 	ShopId     int       `xorm:"bigint" form:"shopId"`
 	CreateTime time.Time `xorm:"datetime" form:"createTime"`
 }
+
+//===============================订单查询Dto===============================
+type GetOrderPageSearch struct {
+	OrderName string
+}
+
+type GetOrderResult struct {
+	OrderId    int
+	OrderName  string
+	IsVirtual  byte
+	ShopId     int
+	CreateTime time.Time
+}
+
+//===============================订单查询Dto===============================

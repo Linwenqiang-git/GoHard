@@ -2,6 +2,7 @@ package controller
 
 import (
 	"log"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	Dto "github.linwenqiang.com/GinStudy/Model/Dto"
@@ -21,13 +22,14 @@ func (oc *OrderController) CreateOrder(context *gin.Context) {
 		println("获取参数出错：" + err.Error())
 		result.Error(500, "获取参数出错")
 	}
+	model.CreateTime = time.Now()
 	//调用具体的业务逻辑层
 	service := impl.NewOrdeService()
-	data, err := service.CreateOrder(model)
+	data := service.CreateOrder(model)
 	if data > 0 {
 		result.Success("创建订单成功")
 	} else {
-		result.Success("创建订单失败:" + err.Error())
+		result.Error(200, "创建订单失败:"+err.Error())
 	}
 }
 
