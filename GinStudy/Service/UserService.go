@@ -23,9 +23,9 @@ func (user *UserService) Login(username, password string) []interface{} {
 	return nil
 	//return user.Repo.Query("select * from UserDto", &Dto.UserDto{})
 }
-func (user *UserService) GetUserInfo(id int) interface{} {
-	return &Dto.UserDto{
-		Username: "1",
-		Password: "2",
-	}
+func (user *UserService) GetUserInfo(id int) []interface{} {
+	var context repo.IDbContext = &repo.DbContext{}
+	context.SetConnect("root:LWQlwq123@@tcp(127.0.0.1:3306)/golangstudy")
+	result := context.Query("select * from UserDto", &Dto.UserDto{})
+	return result
 }

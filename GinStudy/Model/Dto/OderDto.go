@@ -2,12 +2,12 @@ package dto
 
 import "time"
 
-type OrderDto struct {
-	OrderId    int       `xorm:"pk autoincr"`
-	OrderName  string    `xorm:"varchar(100)" form:"ordername"`
-	IsVirtual  byte      `xorm:"tinyint" form:"isVirtual"`
-	ShopId     int       `xorm:"bigint" form:"shopId"`
-	CreateTime time.Time `xorm:"datetime" form:"createTime"`
+type Order struct {
+	OrderId    int       `xorm:"pk autoincr 'OrderId'"`
+	OrderName  string    `xorm:"varchar(100) 'OrderName'" form:"ordername"`
+	IsVirtual  byte      `xorm:"tinyint 'IsVirtual'" form:"isVirtual"`
+	ShopId     int       `xorm:"bigint 'ShopId'" form:"shopId"`
+	CreateTime time.Time `xorm:"datetime 'CreateTime'" form:"createTime"`
 }
 
 //===============================订单查询Dto===============================

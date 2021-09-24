@@ -10,12 +10,14 @@ type OrderDao struct {
 	engine *xorm.Engine
 }
 
-func (od *OrderDao) CreateOrder(model Dto.OrderDto) (int64, error) {
+//新增订单
+func (od *OrderDao) CreateOrder(model Dto.Order) (int64, error) {
 	return od.engine.Insert(model)
 }
 
 func (od *OrderDao) QueryOrder(pageSearch Dto.GetOrderPageSearch) ([]Dto.GetOrderResult, error) {
 	result := []Dto.GetOrderResult{}
-	_, err := od.engine.Alias("o").Where("o.ordername like '%?%'", pageSearch.OrderName).Asc("orderid").Get(&result)
+	//_, err := od.engine.Table("Order").Alias("o").Where("o.ordername = '?'", pageSearch.OrderName).Asc("orderid").Get(&result)
+	_, err := od.engine.Table("Order").Alias("o").Asc("orderid").Rows(result)
 	return result, err
 }

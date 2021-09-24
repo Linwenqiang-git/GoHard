@@ -36,7 +36,7 @@ func initMySQLConfig(cfg *ini.File) (*Repo.MySqlDbConfig, error) {
 func initMysqlStr(option *Repo.MySqlDbConfig) string {
 	var constr string = option.User + ":"
 	constr += option.Password + "@"
-	constr += "@tcp"
+	constr += "tcp"
 	constr += "(" + option.Ip + ":" + strconv.Itoa(option.Port) + ")/"
 	constr += option.Database
 	return constr

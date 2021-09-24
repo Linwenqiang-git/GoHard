@@ -3,10 +3,10 @@ package reponsetory
 import (
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	"reflect"
 
 	_ "github.com/go-sql-driver/mysql"
+	tool "github.linwenqiang.com/GinStudy/Tool"
 	"go.uber.org/dig"
 )
 
@@ -16,9 +16,10 @@ type DbContext struct {
 }
 
 /*============================================继承IDbContext============================================*/
-func (this *DbContext) Data() string {
-	fmt.Println("正常调用到DbContext")
-	return "success"
+func (db *DbContext) SetConnect(conStr string) {
+	context, err := sql.Open("mysql", conStr)
+	tool.PanicError(err)
+	db.Context = context
 }
 
 /*常用数据库操作*/

@@ -47,8 +47,6 @@ func GetUserInfo(this UserController, context *gin.Context) {
 	dataResult := this.UserService.GetUserInfo(id)
 	result := Dto.NewResult(context)
 	result.Success(dataResult)
-	//json格式返回数据
-	context.JSON(200, &result)
 }
 
 /*======================================内部action 不对外提供使用======================================*/
@@ -73,9 +71,10 @@ func BindingUserControllerRouting(engine *gin.Engine, container *dig.Container) 
 			//无法获取到返回结果
 			result.Success("我成功返回啦")
 		})
+
 		UserRoute.GET("/GetUserInfo/:userid", func(context *gin.Context) {
-			//PrintDI_Error(container.Provide(*context))
-			PrintDI_Error(container.Invoke(GetUserInfo))
+			controller := UserController{UserService: service.UserService{}}
+			GetUserInfo(controller, context)
 		})
 	}
 }
