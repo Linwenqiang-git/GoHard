@@ -11,13 +11,13 @@ type OrderDao struct {
 }
 
 //新增订单
-func (od *OrderDao) CreateOrder(model Dto.Order) (int64, error) {
+func (od *OrderDao) CreateOrder(model *Dto.Order) (int64, error) {
 	return od.engine.Insert(model)
 }
 
 func (od *OrderDao) QueryOrder(pageSearch Dto.GetOrderPageSearch) ([]Dto.GetOrderResult, error) {
-	result := []Dto.GetOrderResult{}
+	result := make([]Dto.GetOrderResult, 0)
 	//_, err := od.engine.Table("Order").Alias("o").Where("o.ordername = '?'", pageSearch.OrderName).Asc("orderid").Get(&result)
-	_, err := od.engine.Table("Order").Alias("o").Asc("orderid").Rows(result)
+	err := od.engine.Table("Order").Alias("o").Asc("OrderId").Find(&result)
 	return result, err
 }

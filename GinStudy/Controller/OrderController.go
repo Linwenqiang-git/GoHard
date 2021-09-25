@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -26,7 +27,8 @@ func (oc *OrderController) CreateOrder(context *gin.Context) {
 	model.CreateTime = time.Now()
 	//调用具体的业务逻辑层
 	service := impl.NewOrdeService()
-	data := service.CreateOrder(model)
+	fmt.Printf("%v", model)
+	data := service.CreateOrder(&model)
 	result.Success(data)
 }
 

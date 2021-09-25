@@ -9,7 +9,7 @@ import (
 type OrderService struct {
 }
 
-func (os *OrderService) CreateOrder(model Dto.Order) int64 {
+func (os *OrderService) CreateOrder(model *Dto.Order) int64 {
 	dao := Dao.NewOrderDao()
 	reflctrows, err := dao.CreateOrder(model)
 	helper.PrintInfoError(err)
