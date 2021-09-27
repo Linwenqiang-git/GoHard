@@ -20,6 +20,7 @@ func main() {
 		2.单个接口只用，可直接在第二个参数，把中间件方法传入
 	*/
 	engine.Use(RequestHandle())
+	engine.Use(Cors())
 
 	//依赖注入
 	container := ServiceBaseConfiguration()
