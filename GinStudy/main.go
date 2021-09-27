@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	. "github.linwenqiang.com/GinStudy/Controller"
 	controller "github.linwenqiang.com/GinStudy/Controller"
 	. "github.linwenqiang.com/GinStudy/DependentInjection"
 	. "github.linwenqiang.com/GinStudy/MiddleWare"
@@ -31,7 +30,7 @@ func main() {
 	//engine.Static("/img", "./img")
 
 	//绑定路由
-	BindingUserControllerRouting(engine, container)
+	controller.BindingUserControllerRouting(engine, container)
 	//这种路由绑定方式比较友好
 	new(controller.OrderController).BindingOrderControllerRouting(engine)
 

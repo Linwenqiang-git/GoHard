@@ -32,7 +32,7 @@ func (od *OrderDao) DeleteOrder(model *Dto.Order) (int64, error) {
 func (od *OrderDao) QueryOrder(pageSearch Dto.GetOrderPageSearch) ([]Dto.GetOrderResult, error) {
 	result := make([]Dto.GetOrderResult, 0)
 	//这个地方必须指定table，不然会用struct的名称作为表名
-	session := od.engine.Cols("OrderId", "OrderName", "IsVirtual", "ShopId", "CreateTime")
+	session := od.engine.Cols("OrderId", "OrderName", "CreateTime")
 	session.Table("Order").Alias("o").Where("1=1")
 	if pageSearch.OrderName != "" {
 		session.And("o.ordername like ?", "%"+pageSearch.OrderName+"%")
