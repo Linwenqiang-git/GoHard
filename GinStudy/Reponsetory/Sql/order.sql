@@ -24,10 +24,9 @@ DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order`  (
   `OrderId` int NOT NULL AUTO_INCREMENT,
   `OrderName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '订单名称',
-  `IsVirtual` tinyint NULL DEFAULT NULL COMMENT '是否虚拟商品',
-  `ShopId` bigint NULL DEFAULT NULL COMMENT '商品ID',
   `CreateTime` datetime NULL DEFAULT NULL COMMENT '交易时间',
   PRIMARY KEY (`OrderId`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
+

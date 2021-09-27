@@ -5,8 +5,6 @@ import "time"
 type Order struct {
 	OrderId    int       `xorm:"pk autoincr 'OrderId'"`
 	OrderName  string    `xorm:"varchar(100) 'OrderName'" form:"ordername"`
-	IsVirtual  byte      `xorm:"tinyint 'IsVirtual'" form:"isVirtual"`
-	ShopId     int       `xorm:"bigint 'ShopId'" form:"shopId"`
 	CreateTime time.Time `xorm:"datetime 'CreateTime'" form:"createTime"`
 }
 
@@ -16,11 +14,9 @@ type GetOrderPageSearch struct {
 }
 
 type GetOrderResult struct {
-	OrderId    int       `xorm:"pk autoincr 'OrderId'"`
-	OrderName  string    `xorm:"varchar(100) 'OrderName'" form:"ordername"`
-	IsVirtual  byte      `xorm:"tinyint 'IsVirtual'" form:"isVirtual"`
-	ShopId     int       `xorm:"bigint 'ShopId'" form:"shopId"`
-	CreateTime time.Time `xorm:"datetime 'CreateTime'" form:"createTime"`
+	OrderId    int       `xorm:"'OrderId'"`
+	OrderName  string    `xorm:"'OrderName'"`
+	CreateTime time.Time `xorm:"'CreateTime'"`
 }
 
 //===============================订单查询Dto===============================
