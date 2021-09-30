@@ -3,7 +3,6 @@ package orm
 import (
 	"fmt"
 	"os"
-	"strconv"
 
 	"github.com/go-xorm/xorm"
 	GlocConfig "github.linwenqiang.com/GinStudy/AppSetting"
@@ -15,11 +14,7 @@ type XormDbContext struct {
 }
 
 func initMysqlStr(option *Repo.MySqlDbConfig) string {
-	var constr string = option.User + ":"
-	constr += option.Password + "@"
-	constr += "tcp"
-	constr += "(" + option.Ip + ":" + strconv.Itoa(option.Port) + ")/"
-	constr += option.Database
+	constr := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", option.User, option.Password, option.Ip, option.Port, option.Database)
 	return constr
 }
 

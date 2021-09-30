@@ -2,6 +2,7 @@ package db
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"time"
 
@@ -37,11 +38,12 @@ func (cs *RedisStore) Get(key string, clear bool) string {
 
 var Redis *redis.Client
 
+//初始化redis
 func InitRediStore() *RedisStore {
 	config := glocConfig.GetConfig().RedisConfig
 
 	Redis = redis.NewClient(&redis.Options{
-		Addr:     config.Addr + ":" + string(config.Port),
+		Addr:     fmt.Sprintf("%s:%d", config.Addr, config.Port),
 		Password: "",
 		DB:       config.Db,
 	})
@@ -49,7 +51,6 @@ func InitRediStore() *RedisStore {
 	customeStore := &RedisStore{
 		redisClient: Redis,
 		ctx:         ctx}
-	//base64Captcha.SetCustomStore(customeStore)
 
 	return customeStore
 }
