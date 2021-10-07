@@ -1,68 +1,41 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func isValid(s string) (result bool) {
-	if len(s)%2 != 0 {
+	stringlen := len(s)
+	if stringlen%2 != 0 {
 		return false
 	}
-	result = true
-	stringlen := len(s)
+	matchsymbol := map[byte]byte{
+		']': '[',
+		')': '(',
+		'}': '{',
+	}
+
+	stack := []byte{}
 	for i := 0; i < stringlen; i++ {
-		if string(s[i]) == ")" || string(s[i]) == "}" || string(s[i]) == "]" {
-			return false
-		}
-		if i+1 < len(s) {
-			if string(s[i]) == "(" {
-				if string(s[i+1]) == ")" {
-					i++ //左右匹配
-					continue
-				} else {
-					//末尾匹配
-					if string(s[len(s)-i-1]) == ")" {
-						stringlen--
-						continue
-					} else {
-						result = false
-						break
-					}
-				}
-			} else if string(s[i]) == "{" {
-				if string(s[i+1]) == "}" {
-					i++ //左右匹配
-					continue
-				} else {
-					//末尾匹配
-					if string(s[len(s)-i-1]) == "}" {
-						stringlen--
-						continue
-					} else {
-						result = false
-						break
-					}
-				}
-			} else if string(s[i]) == "[" {
-				if string(s[i+1]) == "]" {
-					i++ //左右匹配
-					continue
-				} else {
-					//末尾匹配
-					if string(s[len(s)-i-1]) == "]" {
-						stringlen--
-						continue
-					} else {
-						result = false
-						break
-					}
-				}
+		if matchsymbol[s[i]] > 0 {
+			//右侧元素
+			if len(stack) == 0 || stack[len(stack)-1] != matchsymbol[s[i]] {
+				return false
 			}
+			//出栈  问题的关键是要把匹配符的括号出栈
+			stack = stack[:len((stack))-1]
+
+		} else {
+			//左侧元素入栈
+			stack = append(stack, s[i])
 		}
 	}
-	return result
+	//全部匹配成功则为0
+	return len(stack) == 0
 }
 
 func main() {
-	data := []string{"(([]){})", "({[]})", "}{"}
+	data := []string{"(([]){})", "({[]})", "}{", "([)]"}
 	for _, value := range data {
 		result := isValid(value)
 		fmt.Printf("字符串: %s  结果：%v\n", value, result)
