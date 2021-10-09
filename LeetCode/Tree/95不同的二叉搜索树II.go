@@ -11,7 +11,49 @@ package tree
 */
 
 func generateTrees(n int) []*TreeNode {
+	if n == 0 {
+		return nil
+	}
+	return generateTree(1, n)
+}
 
+func generateTree(start, end int) []*TreeNode {
+	result := []*TreeNode{}
+	if start > end {
+		return nil
+	}
+	for i := start; i <= end; i++ {
+		currentPoint := &TreeNode{Val: i, Left: nil, Right: nil}
+		leftTreeNode := generateTree(1, i-1)
+		rightTreeNode := generateTree(i+1, end)
+		//从左侧选一个 在从右侧选一个
+		if leftTreeNode == nil && rightTreeNode == nil {
+			result = append(result, currentPoint)
+			continue
+		}
+		if leftTreeNode == nil && rightTreeNode != nil {
+			for r := 0; r < len(rightTreeNode); r++ {
+				currentPoint.Right = rightTreeNode[r]
+				result = append(result, currentPoint)
+			}
+			continue
+		}
+		if leftTreeNode != nil && rightTreeNode == nil {
+			for l := 0; l < len(leftTreeNode); l++ {
+				currentPoint.Right = leftTreeNode[l]
+				result = append(result, currentPoint)
+			}
+			continue
+		}
+		for l := 0; l < len(leftTreeNode); l++ {
+			currentPoint.Left = leftTreeNode[l]
+			for r := 0; r < len(rightTreeNode); r++ {
+				currentPoint.Right = rightTreeNode[r]
+				result = append(result, currentPoint)
+			}
+		}
+	}
+	return result
 }
 
 func main() {
