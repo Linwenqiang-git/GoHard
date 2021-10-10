@@ -1,5 +1,7 @@
 package tree
 
+import "fmt"
+
 /*
 二叉查找树（Binary Search Tree），（又：二叉搜索树，二叉排序树）它或者是一棵空树，
 或者是具有下列性质的二叉树：
@@ -18,37 +20,20 @@ func generateTrees(n int) []*TreeNode {
 }
 
 func generateTree(start, end int) []*TreeNode {
-	result := []*TreeNode{}
+	fmt.Printf("start = %d", start)
 	if start > end {
-		return nil
+		return []*TreeNode{nil} //这里不要返回nil 这样下面遍历就不需要考虑多种情况
 	}
+	result := []*TreeNode{}
 	for i := start; i <= end; i++ {
-		currentPoint := &TreeNode{Val: i, Left: nil, Right: nil}
-		leftTreeNode := generateTree(1, i-1)
+		leftTreeNode := generateTree(start, i-1) //左侧要传start 不能传1，比如当1是根节点的时候，子节点就不能有1
 		rightTreeNode := generateTree(i+1, end)
 		//从左侧选一个 在从右侧选一个
-		if leftTreeNode == nil && rightTreeNode == nil {
-			result = append(result, currentPoint)
-			continue
-		}
-		if leftTreeNode == nil && rightTreeNode != nil {
-			for r := 0; r < len(rightTreeNode); r++ {
-				currentPoint.Right = rightTreeNode[r]
-				result = append(result, currentPoint)
-			}
-			continue
-		}
-		if leftTreeNode != nil && rightTreeNode == nil {
-			for l := 0; l < len(leftTreeNode); l++ {
-				currentPoint.Right = leftTreeNode[l]
-				result = append(result, currentPoint)
-			}
-			continue
-		}
-		for l := 0; l < len(leftTreeNode); l++ {
-			currentPoint.Left = leftTreeNode[l]
-			for r := 0; r < len(rightTreeNode); r++ {
-				currentPoint.Right = rightTreeNode[r]
+		for _, left := range leftTreeNode {
+			for _, right := range rightTreeNode {
+				currentPoint := &TreeNode{Val: i, Left: nil, Right: nil}
+				currentPoint.Left = left
+				currentPoint.Right = right
 				result = append(result, currentPoint)
 			}
 		}
