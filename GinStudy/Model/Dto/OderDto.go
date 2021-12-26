@@ -11,6 +11,7 @@ type Order struct {
 //===============================订单查询Dto===============================
 type GetOrderPageSearch struct {
 	OrderName string
+	PageData  *PageInfo
 }
 
 type GetOrderResult struct {

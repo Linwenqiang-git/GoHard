@@ -23,4 +23,5 @@ func RequestHandle() gin.HandlerFunc {
 
 		fmt.Println("请求返回的状态码", context.Writer.Status())
 	}
+
 }
