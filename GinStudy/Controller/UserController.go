@@ -22,7 +22,16 @@ type UserController struct {
 }
 
 /*======================================内部action 不对外提供使用======================================*/
-//用户登录
+// @Summary 用户登录
+// @title Swagger Example API
+// @version 0.0.1
+// @description  This is a sample server Petstore server.
+// @BasePath /User
+// @Host 127.0.0.1:8090
+// @Produce  json
+// @Param name query string true "Name"
+// @Success 200 {string} json "{"code":200,"data":"name","msg":"ok"}"
+// @Router /User/Login [Post]
 func Login(this UserController) {
 
 	fmt.Println("正常调用到conterller")
