@@ -42,8 +42,8 @@ func main() {
 	//这种路由绑定方式比较友好
 	new(controller.OrderController).BindingOrderControllerRouting(engine)
 
-	err := engine.Run("192.168.1.102:8090")
-	if err != nil { 	
+	err := engine.Run("127.0.0.1:8090")
+	if err != nil {
 		println("start server fail:", err)
 	}
 }

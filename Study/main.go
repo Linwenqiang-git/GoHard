@@ -17,9 +17,16 @@ var (
 	b bool
 )
 
+func outOfRange() int {
+	arr := [3]int{1, 2, 3}
+	i := 4
+	elem := arr[i]
+	return elem
+}
 func main() {
 	//SliceCap()
-	fmt.Println("test new print")
+	x := outOfRange()
+	fmt.Println(x)
 	//GM.BasedVriable()
 	//GM.DinamicSlice()
 
