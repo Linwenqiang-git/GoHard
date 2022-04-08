@@ -64,10 +64,3 @@ func addBinary2(a string, b string) string {
 	}
 	return ans
 }
-
-func max(x, y int) int {
-	if x > y {
-		return x
-	}
-	return y
-}
