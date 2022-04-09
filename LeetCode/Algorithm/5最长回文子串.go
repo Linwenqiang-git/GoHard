@@ -11,28 +11,33 @@ func longestPalindrome(s string) string {
 	n := len(s)
 	start, end := 0, 0
 	for i := 0; i < len(s); i++ {
-		Lpoint, Rpoint := i, i
-		for Lpoint >= 0 && Rpoint < n {
-			if s[Lpoint] == s[Rpoint] {
-				Lpoint -= 1
-				Rpoint += 1
-			} else {
-				break
-			}
+		left1, right1 := expandAroundCenter(s, n, i, i)
+		//兼容两个相邻字符相同的情况
+		left2, right2 := expandAroundCenter(s, n, i, i+1)
+		if right1-left1 > end-start {
+			start, end = left1, right1
 		}
-		Lpoint += 1
-		Rpoint -= 1
-		if Rpoint-Lpoint > end-start {
-			start, end = Lpoint, Rpoint
+		if right2-left2 > end-start {
+			start, end = left2, right2
 		}
-		if Lpoint == 0 && Rpoint+1 == n {
+		if start == 0 && end+1 == n {
 			break
 		}
 	}
-
 	return s[start : end+1]
+}
+func expandAroundCenter(s string, length, Lpoint, Rpoint int) (int, int) {
+	for Lpoint >= 0 && Rpoint < length && s[Lpoint] == s[Rpoint] {
+		//满足条件继续移动指针
+		Lpoint -= 1
+		Rpoint += 1
+	}
+	//表示上一次移动的指针已经不符合条件，移动回上次符合条件的地方
+	Lpoint += 1
+	Rpoint -= 1
+	return Lpoint, Rpoint
 }
 
 func Call_5() {
-	fmt.Println(longestPalindrome("babad"))
+	fmt.Println(longestPalindrome("cbbd"))
 }
