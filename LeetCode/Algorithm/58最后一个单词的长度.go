@@ -1,4 +1,4 @@
-package main
+package algorithm
 
 import "fmt"
 
@@ -18,7 +18,7 @@ func lengthOfLastWord(s string) int {
 	return length
 }
 
-func main() {
+func Call_58() {
 	result := lengthOfLastWord("a")
 	fmt.Printf("length = %d\n", result)
 }

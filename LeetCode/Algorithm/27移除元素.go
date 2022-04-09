@@ -1,4 +1,4 @@
-package main
+package algorithm
 
 import "fmt"
 
@@ -18,7 +18,7 @@ func removeElement(nums []int, val int) int {
 	return slow
 }
 
-func main() {
+func Call_27() {
 	data := []int{3, 2, 2, 3}
 	result := removeElement(data, 3)
 	fmt.Printf("数组长度：%d\n", result)

@@ -1,4 +1,4 @@
-package main
+package algorithm
 
 import (
 	"fmt"
@@ -34,7 +34,7 @@ func lengthOfLongestSubstring(s string) int {
 	return max
 }
 
-func main() {
+func Call_3() {
 	fmt.Println(lengthOfLongestSubstring2(" "))
 }
 

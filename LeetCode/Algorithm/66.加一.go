@@ -1,8 +1,8 @@
-package main
+package algorithm
 
 import "fmt"
 
-func main() {
+func Call_66() {
 	//digits := []int{9, 9, 9}
 	//digits := []int{1, 9, 9}
 	digits := []int{0}

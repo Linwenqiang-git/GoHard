@@ -1,11 +1,11 @@
-package main
+package algorithm
 
 import (
 	"fmt"
 	"strconv"
 )
 
-func main() {
+func Call_67() {
 	data := 1 / 2
 	fmt.Println(data)
 	fmt.Print(addBinary("1011", "1010"))

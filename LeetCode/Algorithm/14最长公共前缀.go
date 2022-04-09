@@ -1,4 +1,4 @@
-package main
+package algorithm
 
 import (
 	"fmt"
@@ -45,7 +45,7 @@ func longestCommonPrefix(strs []string) string {
 	return result
 }
 
-func main() {
+func Call_14() {
 	//strs := []string{"flower", "flow", "flight"}
 	strs := []string{"dog", "racecar", "car"}
 	result := longestCommonPrefix(strs)

@@ -1,4 +1,4 @@
-package main
+package algorithm
 
 import "fmt"
 
@@ -66,7 +66,7 @@ func maxSubArray2(nums []int) int {
 	return max
 }
 
-func main() {
+func Call_53() {
 	//nums := []int{-2, 1, -3, 4, -1, 2, 1, -5, 1}
 	nums := []int{1, -2, 0}
 	result := maxSubArray(nums)

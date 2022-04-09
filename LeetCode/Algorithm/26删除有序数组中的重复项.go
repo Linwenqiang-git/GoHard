@@ -1,4 +1,4 @@
-package main
+package algorithm
 
 import "fmt"
 
@@ -34,7 +34,7 @@ func removeDuplicates1(nums []int) int {
 	return slow
 }
 
-func main() {
+func Call_26() {
 	data := []int{1, 1, 1, 2, 3, 4}
 	result := removeDuplicates1(data)
 	fmt.Printf("数组长度：%d\n", result)

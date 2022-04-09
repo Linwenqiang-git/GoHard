@@ -1,8 +1,8 @@
-package main
+package algorithm
 
 import "fmt"
 
-func main() {
+func Call_463() {
 	//data := [][]int{{0, 1, 0, 0}, {1, 1, 1, 0}, {0, 1, 0, 0}, {1, 1, 0, 0}}
 	data := [][]int{{1, 0}}
 	fmt.Println(islandPerimeter(data))

@@ -1,4 +1,4 @@
-package main
+package algorithm
 
 import "fmt"
 
@@ -31,7 +31,7 @@ func strStr(haystack string, needle string) int {
 	return result
 }
 
-func main() {
+func Call_28() {
 	data := strStr("hello", "ll")
 	fmt.Printf("匹配到的元素:%d", data)
 }

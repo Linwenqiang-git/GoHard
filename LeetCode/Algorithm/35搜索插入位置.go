@@ -1,4 +1,4 @@
-package main
+package algorithm
 
 func searchInsert(nums []int, target int) int {
 	//排序数组，最快是二分法查找
@@ -25,6 +25,6 @@ func searchInsert(nums []int, target int) int {
 	return result
 }
 
-func main() {
+func Call_35() {
 
 }

@@ -1,4 +1,4 @@
-package main
+package algorithm
 
 import (
 	"fmt"
@@ -34,7 +34,7 @@ func isValid(s string) (result bool) {
 	return len(stack) == 0
 }
 
-func main() {
+func Call_20() {
 	data := []string{"(([]){})", "({[]})", "}{", "([)]"}
 	for _, value := range data {
 		result := isValid(value)

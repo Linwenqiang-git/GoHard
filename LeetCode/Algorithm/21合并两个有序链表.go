@@ -1,11 +1,6 @@
-package main
+package algorithm
 
 import "fmt"
-
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
 
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	data := []int{}
@@ -112,7 +107,7 @@ func mergeTwoLists2(l1 *ListNode, l2 *ListNode) *ListNode {
 	return firstPoint
 }
 
-func main() {
+func Call_21() {
 	l1_3 := &ListNode{Val: 5, Next: nil}
 	l1_2 := &ListNode{Val: 2, Next: l1_3}
 	l1_1 := &ListNode{Val: 1, Next: l1_2}
