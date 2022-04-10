@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	algorithm.Call_5()
+	algorithm.Call_6()
 }
