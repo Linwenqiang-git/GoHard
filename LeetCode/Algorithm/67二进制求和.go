@@ -3,6 +3,8 @@ package algorithm
 import (
 	"fmt"
 	"strconv"
+
+	utility "github.linwenqiang.com/LeetCode/Utility"
 )
 
 func Call_67() {
@@ -47,7 +49,7 @@ func addBinary2(a string, b string) string {
 	ans := ""
 	carry := 0
 	lenA, lenB := len(a), len(b)
-	n := max(lenA, lenB)
+	n := utility.Max(lenA, lenB)
 
 	for i := 0; i < n; i++ {
 		if i < lenA {

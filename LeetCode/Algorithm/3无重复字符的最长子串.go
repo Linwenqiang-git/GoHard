@@ -3,6 +3,7 @@ package algorithm
 import (
 	"fmt"
 	"strings"
+	utility "github.linwenqiang.com/LeetCode/Utility"
 )
 
 func lengthOfLongestSubstring(s string) int {
@@ -56,7 +57,7 @@ func lengthOfLongestSubstring2(s string) int {
 			rk++
 		}
 		// 第 i 到 rk 个字符是一个极长的无重复字符子串
-		ans = max(ans, rk-i+1)
+		ans = utility.Max(ans, rk-i+1)
 	}
 	return ans
 }

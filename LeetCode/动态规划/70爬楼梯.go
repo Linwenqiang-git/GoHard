@@ -1,4 +1,4 @@
-package main
+package dynamicprogramming
 
 //f(x) = f(x-1) + f(x-2)
 //递归到x=44会超时
