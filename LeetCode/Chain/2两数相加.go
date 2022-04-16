@@ -1,4 +1,4 @@
-package algorithm
+package chain
 
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	var p *ListNode = &ListNode{}
