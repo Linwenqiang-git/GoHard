@@ -1,4 +1,4 @@
-package utility
+package utility //utility "github.linwenqiang.com/LeetCode/Utility"
 
 func Max(x, y int) int {
 	if x < y {
