@@ -1,17 +1,23 @@
 package tree
 
-import "github.com/go-playground/locales/root"
-
-var result = make([][]int, 0)
+var result [][]int
 
 func levelOrder(root *TreeNode) [][]int {
-
+	result = make([][]int, 0)
+	ergodic(root, 0)
+	return result
 }
 
-func ergodic(left *TreeNode, right *TreeNode) []int{
-	if left == right {
-		result = append(result, []int{left.Val})
-		return
+func ergodic(root *TreeNode, index int) {
+	if root != nil {
+		if index >= len(result) {
+			result = append(result, make([]int, 0))
+		}
+		if result[index] == nil {
+			result[index] = make([]int, 0)
+		}
+		result[index] = append(result[index], root.Val)
+		ergodic(root.Left, index+1)
+		ergodic(root.Right, index+1)
 	}
-	result = append(result, ergodic(left.Left,left.Right))
 }
