@@ -1,0 +1,29 @@
+package tree
+
+
+var result [][]int
+func zigzagLevelOrder(root *TreeNode) [][]int {
+	result = make([][]int,0)
+	dfsByIndex(root,0)
+	return result
+}
+
+func dfsByIndex(root *TreeNode,index int){
+	if root != nil{
+		if index >= len(result){
+			result = append(result,make([]int,0))
+		}
+		if result[index] == nil{
+			result[index] = make([]int,0)
+		}
+		result[index] = append(result[index],root.Val)
+		if index != 0 &&  index % 2 == 0{
+			dfsByIndex(root.Left,index + 1)
+			dfsByIndex(root.Right,index + 1)
+		}else{
+			dfsByIndex(root.Right,index + 1)
+			dfsByIndex(root.Left,index + 1)
+		}
+	}
+
+}
