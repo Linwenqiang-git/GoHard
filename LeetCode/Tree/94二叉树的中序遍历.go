@@ -16,7 +16,3 @@ func inorderTraversal(root *TreeNode) []int {
 	}
 	return result
 }
-
-func main() {
-
-}

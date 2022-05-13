@@ -3,9 +3,9 @@ package main
 import (
 
 	//. "/DataLogic/dataLogic"  //_ 表示会走包的init方法，下面不调用也OK
-	"fmt"
 
 	_ "github.linwenqiang.com/Study/DataLogic" // . 表示调用内部公开方法时可不用写包名
+	. "github.linwenqiang.com/Study/SmallTools"
 	//DL "/DataLogic/dataLogic" //DL 给包起的别名
 	//_ "github.linwenqiang.com/Study/Grammar"
 	//. "github.linwenqiang.com/Study/Test"
@@ -23,10 +23,25 @@ func outOfRange() int {
 	elem := arr[i]
 	return elem
 }
+
+var BasePath string = "C:\\work5.0\\xbot-v3\\src\\client\\"
+
 func main() {
 	//SliceCap()
-	x := outOfRange()
-	fmt.Println(x)
+	// x := outOfRange()
+	// fmt.Println(x)
+	// WaitDealFile := map[string]string{
+	// 	"ShadowBot.UIAutomation":       "UIAutomation",
+	// 	"ShadowBot.UIAutomation.Tools": "Tools",
+	// }
+	// for k, v := range WaitDealFile {
+	// 	filePaht := BasePath + k
+	// 	Fraversal_folder_all_file(filePaht, v)
+	// }
+	UpdateCSSourceFile()
+
+	//Dic_to_excel(result, "RobotApi") //写入excel
+	//UpdateSourceFile(result, "cs", "DateTimeExtension", filePaht)
 	//GM.BasedVriable()
 	//GM.DinamicSlice()
 
