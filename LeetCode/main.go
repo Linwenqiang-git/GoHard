@@ -5,12 +5,5 @@ import (
 )
 
 func main() {
-	algorithm.Call_33()
-	for n := 1; n < 100000; n++ {
-		allocate()
-	}
-}
-
-func allocate() {
-    _ = make([]byte, 1<<20)
+	algorithm.Call_473()
 }
