@@ -1,15 +1,12 @@
 package main
 
-import (
+//. "/DataLogic/dataLogic"  //_ 表示会走包的init方法，下面不调用也OK
 
-	//. "/DataLogic/dataLogic"  //_ 表示会走包的init方法，下面不调用也OK
-
-	_ "github.linwenqiang.com/Study/DataLogic" // . 表示调用内部公开方法时可不用写包名
-	. "github.linwenqiang.com/Study/SmallTools"
-	//DL "/DataLogic/dataLogic" //DL 给包起的别名
-	//_ "github.linwenqiang.com/Study/Grammar"
-	//. "github.linwenqiang.com/Study/Test"
-)
+//_ "github.linwenqiang.com/Study/DataLogic" // . 表示调用内部公开方法时可不用写包名
+//. "github.linwenqiang.com/Study/SmallTools"
+//DL "/DataLogic/dataLogic" //DL 给包起的别名
+//_ "github.linwenqiang.com/Study/Grammar"
+//. "github.linwenqiang.com/Study/Test"
 
 //声明全局变量
 var (
@@ -27,6 +24,9 @@ func outOfRange() int {
 var BasePath string = "C:\\work5.0\\xbot-v3\\src\\client\\"
 
 func main() {
+	a := int(100)
+	var f *float64
+	f = &a
 	//SliceCap()
 	// x := outOfRange()
 	// fmt.Println(x)
@@ -38,7 +38,7 @@ func main() {
 	// 	filePaht := BasePath + k
 	// 	Fraversal_folder_all_file(filePaht, v)
 	// }
-	UpdateCSSourceFile()
+	//UpdateCSSourceFile()
 
 	//Dic_to_excel(result, "RobotApi") //写入excel
 	//UpdateSourceFile(result, "cs", "DateTimeExtension", filePaht)
