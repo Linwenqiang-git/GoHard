@@ -1,6 +1,9 @@
 package algorithm
 
-import "sort"
+import (
+	"sort"
+	"strings"
+)
 
 func repeatedNTimes(nums []int) int {
 	sort.Ints(nums)
@@ -12,4 +15,16 @@ func repeatedNTimes(nums []int) int {
 		}
 	}
 	return ret
+}
+
+func numUniqueEmails(emails []string) int {
+	email := make(map[string]bool)
+	for _, value := range emails {
+		i := strings.IndexByte(value, '@')
+		local := strings.SplitN(value[:i], "+", 2)[0] // 去掉本地名第一个加号之后的部分
+		local = strings.ReplaceAll(local, ".", "")    // 去掉本地名中所有的句点
+		email[local+value[i:]] = true
+	}
+
+	return len(email)
 }

@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	algorithm.Call_473()
+	algorithm.Call_875()
 }

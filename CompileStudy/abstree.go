@@ -1,4 +1,4 @@
-package main
+package compilestudy
 
 import (
 	"go/ast"

@@ -1,32 +1,38 @@
 package main
 
-//. "/DataLogic/dataLogic"  //_ 表示会走包的init方法，下面不调用也OK
-
-//_ "github.linwenqiang.com/Study/DataLogic" // . 表示调用内部公开方法时可不用写包名
-//. "github.linwenqiang.com/Study/SmallTools"
-//DL "/DataLogic/dataLogic" //DL 给包起的别名
-//_ "github.linwenqiang.com/Study/Grammar"
-//. "github.linwenqiang.com/Study/Test"
-
-//声明全局变量
-var (
-	a int
-	b bool
+import (
+	//. "github.linwenqiang.com/Study/UnSafe"
+	t "github.linwenqiang.com/CompileStudy"
+	//_ 表示会走包的init方法，下面不调用也OK
+	// . 表示调用内部公开方法时可不用写包名
+	//. "/DataLogic/dataLogic"
+	//_ "github.linwenqiang.com/Study/DataLogic"
+	//. "github.linwenqiang.com/Study/SmallTools"
+	//DL "/DataLogic/dataLogic" //DL 给包起的别名
+	//_ "github.linwenqiang.com/Study/Grammar"
+	//. "github.linwenqiang.com/Study/Test"
 )
 
-func outOfRange() int {
-	arr := [3]int{1, 2, 3}
-	i := 4
-	elem := arr[i]
-	return elem
-}
+//声明全局变量
+// var (
+// 	a int
+// 	b bool
+// )
 
-var BasePath string = "C:\\work5.0\\xbot-v3\\src\\client\\"
+// func outOfRange() int {
+// 	arr := [3]int{1, 2, 3}
+// 	i := 4
+// 	elem := arr[i]
+// 	return elem
+// }
+
+// var BasePath string = "C:\\work5.0\\xbot-v3\\src\\client\\"
 
 func main() {
-	a := int(100)
-	var f *float64
-	f = &a
+	//Visit()
+	t.PrintDynamicType()
+	// a := 2 ^ 3
+	// fmt.Print(a)
 	//SliceCap()
 	// x := outOfRange()
 	// fmt.Println(x)
