@@ -49,16 +49,3 @@ func firstTraversal2(root *TreeNode, key int) *TreeNode {
 	return root
 }
 
-func firstTraversal(root *TreeNode, key int) []int {
-	result := []int{}
-	if root.Val != key {
-		result = append(result, root.Val)
-	}
-	if root.Left != nil {
-		result = append(result, firstTraversal(root.Left, key)...)
-	}
-	if root.Right != nil {
-		result = append(result, firstTraversal(root.Right, key)...)
-	}
-	return result
-}
