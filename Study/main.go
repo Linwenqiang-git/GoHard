@@ -2,7 +2,8 @@ package main
 
 import (
 	//. "github.linwenqiang.com/Study/UnSafe"
-	t "github.linwenqiang.com/CompileStudy"
+	"fmt"
+	//t "github.linwenqiang.com/CompileStudy"
 	//_ 表示会走包的init方法，下面不调用也OK
 	// . 表示调用内部公开方法时可不用写包名
 	//. "/DataLogic/dataLogic"
@@ -29,8 +30,10 @@ import (
 // var BasePath string = "C:\\work5.0\\xbot-v3\\src\\client\\"
 
 func main() {
+	var qcrao = Person(Student{age: 18})
+	fmt.Println(qcrao)
 	//Visit()
-	t.PrintDynamicType()
+	//t.PrintDynamicType()
 	// a := 2 ^ 3
 	// fmt.Print(a)
 	//SliceCap()
@@ -56,4 +59,16 @@ func main() {
 
 	// fmt.Println(IsPalindrome(1000000001))
 	// fmt.Println("罗马字转换:", RomanToInt("MCMXCIV"))
+}
+
+type Person interface {
+	growUp()
+}
+type Student struct {
+	age int
+}
+
+func (p Student) growUp() {
+	p.age += 1
+	return
 }
