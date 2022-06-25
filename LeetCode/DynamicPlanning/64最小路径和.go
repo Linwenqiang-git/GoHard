@@ -1,4 +1,4 @@
-package matrix
+package dynamicprogramming
 
 import (
 	utility "github.linwenqiang.com/LeetCode/Utility"
