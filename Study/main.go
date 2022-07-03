@@ -30,8 +30,11 @@ import (
 // var BasePath string = "C:\\work5.0\\xbot-v3\\src\\client\\"
 
 func main() {
-	var qcrao = Person(Student{age: 18})
-	fmt.Println(qcrao)
+	// var qcrao = Person(Student{age: 18})
+	// fmt.Println(qcrao)
+	// var a, b int
+	// b = incr(a)
+	// fmt.Print(a, b)
 	//Visit()
 	//t.PrintDynamicType()
 	// a := 2 ^ 3
@@ -59,7 +62,33 @@ func main() {
 
 	// fmt.Println(IsPalindrome(1000000001))
 	// fmt.Println("罗马字转换:", RomanToInt("MCMXCIV"))
+	fs := create()
+	for i := 0; i < len(fs); i++ {
+		fs[i]() //每次打印的值都是2
+	}	
 }
+func create() (fs [2]func()) {
+	for i := 0; i < 2; i++ {
+		fs[i] = func() {
+			//栈上只存储i的地址
+			//捕获变量存储的也是i的地址
+			fmt.Println(i)
+		}
+	}
+	return
+}
+
+func incr(a int) (b int) {
+	// var b int
+	defer func() {
+		a++
+		b++
+	}()
+	a++
+	b = a
+	return b //先给返回值赋值  在执行defer函数
+}
+
 
 type Person interface {
 	growUp()
