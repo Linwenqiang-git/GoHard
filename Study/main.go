@@ -12,6 +12,7 @@ import (
 	//DL "/DataLogic/dataLogic" //DL 给包起的别名
 	//_ "github.linwenqiang.com/Study/Grammar"
 	//. "github.linwenqiang.com/Study/Test"
+	tool "github.linwenqiang.com/Study/SmallTools"
 )
 
 //声明全局变量
@@ -30,6 +31,7 @@ import (
 // var BasePath string = "C:\\work5.0\\xbot-v3\\src\\client\\"
 
 func main() {
+	tool.Main()
 	// var qcrao = Person(Student{age: 18})
 	// fmt.Println(qcrao)
 	// var a, b int
@@ -62,10 +64,10 @@ func main() {
 
 	// fmt.Println(IsPalindrome(1000000001))
 	// fmt.Println("罗马字转换:", RomanToInt("MCMXCIV"))
-	fs := create()
-	for i := 0; i < len(fs); i++ {
-		fs[i]() //每次打印的值都是2
-	}	
+	// fs := create()
+	// for i := 0; i < len(fs); i++ {
+	// 	fs[i]() //每次打印的值都是2
+	// }
 }
 func create() (fs [2]func()) {
 	for i := 0; i < 2; i++ {
@@ -88,7 +90,6 @@ func incr(a int) (b int) {
 	b = a
 	return b //先给返回值赋值  在执行defer函数
 }
-
 
 type Person interface {
 	growUp()
